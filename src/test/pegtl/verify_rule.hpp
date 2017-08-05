@@ -32,6 +32,14 @@ namespace tao
          }
       };
 
+      template< typename Rule, typename Input >
+      void verify_input( const std::size_t line, const char* file, const std::string& data, Input&& in, const result_type expected, const std::size_t remain )
+      {
+         {
+            verify_impl_one< Rule, nothing >( line, file, data, std::forward< Input >( in ), expected, remain );
+         }
+      }
+
       template< typename Rule, typename Eol = eol::lf_crlf >
       void verify_rule( const std::size_t line, const char* file, const std::string& data, const result_type expected, const std::size_t remain )
       {
